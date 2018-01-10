@@ -1,0 +1,15 @@
+.text-black {
+    color: #000 !important;
+}
+
+.bg-black {
+    background-color: #000 !important;
+}
+
+::-webkit-input-placeholder {
+    color: #fff;
+}
+
+::-moz-placeholder {
+    color: #fff;
+}

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block script %}
+    {{ super() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <script src="{{ url_for('static', filename='js/api.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}
+
+{% block modal %}
+<div id="createPostModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog model-sm" role="document">
+    <div class="modal-content bg-primary rounded-0 border-0">
+        <div class="modal-body">
+            <form id="createPostForm" method="post">
+                <div class="form-group">
+                    <!-- <label for="titleField">Post Title</label> -->
+                    <input type="text" class="form-control rounded-0 border-0 font-weight-bold text-white" id="titleField" name="title" placeholder="Enter title" style="font-size: 2.5rem; background-color: transparent; outline: none;">
+                </div>
+                <hr>
+                <div class="form-group">
+                    <!-- <label for="contentField">Post Content</label> -->
+                    <textarea class="form-control rounded-0 border-0 text-white" id="contentField" name="body" cols="70" rows="10" placeholder="Enter content" style="font-size: 1.5rem; resize: none; background-color: transparent; outline: none;"></textarea>
+                </div>
+                <button type="submit" class="btn btn-white btn-block btn-lg rounded-0">Submit</button>
+                <button class="d-none" data-dismiss="modal"></button>
+            </form>
+        </div>
+    </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container py-3">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="display-4 text-center">Welcome to Post IO</h1>
+        </div>
+
+        <div class="col-12 col-md-6 offset-md-3 text-center py-3">
+            <button class="btn btn-primary btn-block btn-lg rounded-0" data-target="#createPostModal" data-toggle="modal">Create Post</button>
+        </div>
+
+        <div class="col-12">
+            <div id="postContainer" class="card-columns">
+                {% for post in posts %}
+                <!-- <div class="card border-0 rounded-0">
+                    <div class="card-body bg-primary">
+                        <h1 class="font-weight-bold m-0">{{ post.title }}</h1>
+                        <hr class="my-2">
+                        <h4 class="text-justify">{{ post.body }}</h4>
+                        <hr class="my-2">
+                        <p class="font-italic m-0"><small>{{ post.date.strftime('%B %d, %Y | %I:%M %p') }}</small></p>
+                    </div>
+                </div> -->
+                {% endfor %}
+            </div>
+         </div>
+    </div>
+</div>
+{% endblock %}
