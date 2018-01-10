@@ -8,6 +8,7 @@ import json
 app = Flask(__name__)
 
 app.config.from_object('core.config')
+app.register_blueprint(api.app, url_prefix='/api')
 app.register_blueprint(posts.app)
 
 socketio = SocketIO(app)
