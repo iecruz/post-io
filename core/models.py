@@ -6,7 +6,7 @@ db = PostgresqlDatabase(
     'post',
     user='postgres', 
     password='root', 
-    host='loclahost')
+    host='localhost')
 
 class BaseModel(Model):
     class Meta: 
