@@ -18,10 +18,6 @@ $(function() {
         $('#postContainer').prepend(generate_block_post(msg));
     });
 
-    socket.on('unauthorized', function(msg) {
-        console.log(msg);
-    })
-
     $('#createPostForm').on('submit', function(e) {
         e.preventDefault();
 
