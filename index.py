@@ -2,11 +2,8 @@ from flask import Flask, render_template, request, url_for, jsonify
 from flask_socketio import SocketIO, send, emit
 from core import api, models, posts
 
-# import eventlet
 import time
 import json
-
-# eventlet.monkey_patch()
 
 app = Flask(__name__)
 
