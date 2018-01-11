@@ -2,16 +2,19 @@ from flask import Flask, render_template, request, url_for, jsonify
 from flask_socketio import SocketIO, send, emit
 from core import api, models, posts
 
+import eventlet
 import time
 import json
 
 app = Flask(__name__)
 
+eventlet.monkey_patch()
+
 app.config.from_object('core.config')
 app.register_blueprint(api.app, url_prefix='/api')
 app.register_blueprint(posts.app)
 
-socketio = SocketIO(app)
+socketio = SocketIO(app, async_mode='eventlet')
 
 @app.before_request
 def before_request():
@@ -20,6 +23,14 @@ def before_request():
 @app.teardown_request
 def teardown_request(exception):
     models.close_db()
+
+@socketio.on('connect')
+def on_connect():
+    print('User is connected')
+
+@socketio.on('disconnect')
+def on_disconnect():
+    print('User is disconnected')
 
 @socketio.on('create_post')
 def create_post(message):
