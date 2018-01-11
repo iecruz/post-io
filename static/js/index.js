@@ -4,10 +4,12 @@ $(function() {
     var socket = io.connect(baseUrl);
 
     socket.on('connect', function() {
+        console.log('connected');
         socket.emit('request_load', 'User is connected')
     });
     
     socket.on('response_load', function(msg) {
+        console.log('load post');
         msg.forEach(function(post) {
             $('#postContainer').append(generate_block_post(post));
         });
