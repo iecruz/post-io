@@ -24,14 +24,6 @@ def before_request():
 def teardown_request(exception):
     models.close_db()
 
-@socketio.on('connect')
-def on_connect():
-    print('User is connected')
-
-@socketio.on('disconnect')
-def on_disconnect():
-    print('User is disconnected')
-
 @socketio.on('create_post')
 def create_post(message):
     if api.create_post_socket(message):
