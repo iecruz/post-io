@@ -4,7 +4,7 @@ $(function() {
     var socket = io.connect(baseUrl);
     
     socket.on('insert_post', function(msg) {
-        console.log('insert recieved');
+        console.log('insert received');
         $('#postContainer').prepend(generate_block_post(msg));
     });
 
@@ -15,6 +15,7 @@ $(function() {
             title: $(this).find('input#titleField').val(),
             body: $(this).find('textarea#contentField').val()
         });
+        console.log('post created');
 
         $(e.target).find('button[data-dismiss="modal"]').click();
     });
