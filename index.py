@@ -2,8 +2,11 @@ from flask import Flask, render_template, request, url_for, jsonify
 from flask_socketio import SocketIO, send, emit
 from core import api, models, posts
 
+# import eventlet
 import time
 import json
+
+# eventlet.monkey_patch()
 
 app = Flask(__name__)
 
@@ -13,12 +16,12 @@ app.register_blueprint(posts.app)
 
 socketio = SocketIO(app)
 
-@socketio.on('connect')
-def connect_server():
+@app.before_request
+def before_request():
     models.initialize_db()
 
-@socketio.on('disconnect')
-def connect_server():
+@app.teardown_request
+def teardown_request(exception):
     models.close_db()
 
 @socketio.on('message')
