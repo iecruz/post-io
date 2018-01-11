@@ -1,4 +1,4 @@
-const baseUrl = window.location.origin;
+const baseUrl = `https://${document.location}`;
 
 $(function() {
     var socket = io.connect(baseUrl);
