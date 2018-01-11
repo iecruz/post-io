@@ -36,4 +36,4 @@ def create_post(message):
         emit('insert_post', json.loads(json.dumps(message)), broadcast=True)
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app)
