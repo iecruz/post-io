@@ -3,18 +3,6 @@ const baseUrl = window.location.origin;
 $(function() {
     var socket = io.connect(baseUrl);
     
-    socket.on('connect', function() {
-        console.log('connected');
-        socket.emit('request_load', 'User is connected')
-    });
-    
-    socket.on('response_load', function(msg) {
-        console.log('load post');
-        msg.forEach(function(post) {
-            $('#postContainer').append(generate_block_post(post));
-        });
-    });
-    
     socket.on('insert_post', function(msg) {
         console.log('insert recieved');
         $('#postContainer').prepend(generate_block_post(msg));
@@ -30,7 +18,7 @@ $(function() {
 
         $(e.target).find('button[data-dismiss="modal"]').click();
     });
-})
+});
 
 function generate_block_post(post) {
     var block =

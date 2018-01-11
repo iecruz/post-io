@@ -24,14 +24,6 @@ def before_request():
 def teardown_request(exception):
     models.close_db()
 
-@socketio.on('message')
-def handle_message(message):
-    send(message)
-
-@socketio.on('request_load')
-def request_post(message):
-    emit('response_load', api.get_post_socket())
-
 @socketio.on('create_post')
 def create_post(message):
     if api.create_post_socket(message):
