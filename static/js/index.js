@@ -4,10 +4,7 @@ $(function() {
     var socket = io.connect(baseUrl);
     
     socket.on('insert_post', function(msg) {
-        console.log('insert received');
         $('#postContainer').prepend(generate_block_post(msg));
-    }).on('error', function(msg) {
-        console.log(msg);
     }); 
 
     $('#createPostForm').on('submit', function(e) {
@@ -16,10 +13,7 @@ $(function() {
         socket.emit('create_post', {
             title: $(this).find('input#titleField').val(),
             body: $(this).find('textarea#contentField').val()
-        }).on('error', function(msg) {
-            console.log(msg);
         });
-        console.log('post created');
 
         $(e.target).find('button[data-dismiss="modal"]').click();
     });
