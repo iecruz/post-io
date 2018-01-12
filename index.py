@@ -1,20 +1,20 @@
 from flask import Flask, render_template, request, url_for, jsonify
 from flask_socketio import SocketIO, send, emit
 from core import api, models, posts
+from threading import Lock
+from gevent import monkey
 
-import eventlet
 import time
 import json
 
+monkey.patch_all()
+
 app = Flask(__name__)
-
-eventlet.monkey_patch()
-
 app.config.from_object('core.config')
 app.register_blueprint(api.app, url_prefix='/api')
 app.register_blueprint(posts.app)
 
-socketio = SocketIO(app, async_mode='eventlet')
+socketio = SocketIO(app, async_mode='gevent')
 
 @app.before_request
 def before_request():
@@ -27,8 +27,7 @@ def teardown_request(exception):
 @socketio.on('create_post')
 def create_post(message):
     if api.create_post_socket(message):
-        print(message)
         emit('insert_post', json.loads(json.dumps(message)), broadcast=True)
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app, host='0.0.0.0')
