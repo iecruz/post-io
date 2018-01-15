@@ -1,1 +1,1 @@
-web: gunicorn -k gevent index:app -t 90
+web: gunicorn -k gevent index:app -t 120
