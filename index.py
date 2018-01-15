@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, url_for, jsonify
 from flask_socketio import SocketIO, send, emit
+from flask_cors import CORS
 from core import api, models, posts
 from gevent import monkey
 
@@ -9,6 +10,7 @@ import json
 monkey.patch_all()
 
 app = Flask(__name__)
+CORS(app)
 app.config.from_object('core.config')
 app.register_blueprint(api.app, url_prefix='/api')
 app.register_blueprint(posts.app)
