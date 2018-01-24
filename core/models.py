@@ -1,7 +1,6 @@
 from peewee import *
 import datetime
 
-# db = SqliteDatabase('post.db')
 db = PostgresqlDatabase(
     'post',
     user='postgres', 
