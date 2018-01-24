@@ -19,7 +19,8 @@ $(function() {
     });
 });
 
-function generate_block_post(post) {
+function generate_block_post(post) 
+{
     var block =
         `<div class="card border-0 rounded-0">
             <div class="card-body bg-primary">
@@ -30,4 +31,17 @@ function generate_block_post(post) {
         </div>`;
 
     return block;
+}
+
+function toggle_theme()
+{
+    $('body').toggleClass('bg-white');
+    $('body').toggleClass('bg-black');
+    $('body').toggleClass('text-white');
+    $('body').toggleClass('text-black');
+
+    $('#postContainer').toggleClass('text-white');
+    $('#postContainer').toggleClass('text-black');
+
+
 }
